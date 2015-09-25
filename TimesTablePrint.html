@@ -1,0 +1,53 @@
+<html>
+
+    <head>
+        <title> Print time table</title>
+    </head>
+    
+    <body>
+        <h2> Print time table</h2>
+        <div>
+            Number: <input id="hentry" type="number" value="5"/>
+            <button id="make" onclick="MakeAndPrintTimeTable()" >Make</button>
+            <br/><br/>
+            <hr/>
+        </div>
+        <br/>        
+        <div id="hdiv1"></div>
+    </body>
+
+<script>
+    var div1 = document.getElementById("hdiv1");
+    var entry = document.getElementById("hentry");
+    const template = 
+'<div style="float: left; width: 200px; height: 35px;"> @@1 x @@2 = ___ </div>';
+</script>     
+
+<script>
+    function MakeAndPrintTimeTable()
+    {
+        out = "";
+        cards = 
+        [
+            1,2,3,4,5,6,7,8,9,10,11,12,
+            1,2,3,4,5,6,7,8,9,10,11,12,
+            1,2,3,4,5,6,7,8,9,10,11,12
+        ];
+        
+        for( i=0 ; i < cards.length ;i++ )
+        {
+            j = Math.floor(Math.random() * cards.length);
+            temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] = temp;
+        }
+        for( i=0 ; i < cards.length ;i++ )
+        {
+           out += template.replace("@@2", cards[i]).replace("@@1", entry.value ); 
+        }
+        div1.innerHTML = out;
+        window.setTimeout(window.print,200);
+    }
+</script>
+
+</html>
